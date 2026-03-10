@@ -1,0 +1,34 @@
+========================================================================
+CONCLUSIONES DEL PROYECTO DE AUTOMATIZACIÓN - DEMOBLAZE
+========================================================================
+
+Tras la implementación y refinamiento del marco de pruebas bajo el patrón 
+Screenplay, se obtienen las siguientes conclusiones:
+
+1. La separación de responsabilidades en Tasks, Interactions y Questions 
+   permitió crear un código legible y mantenible. A diferencia del 
+   modelo Page Object tradicional, Screenplay facilitó la reutilización de 
+   lógica, como el proceso de Login, en múltiples flujos (Registro y Compra).
+
+2. El uso de 'actor.remember' y 'actor.recall' resultó ser la solución más 
+   robusta para manejar la persistencia de datos volátiles (como el nombre 
+   de usuario generado aleatoriamente). Esto permitió que la verificación 
+   del mensaje de bienvenida ("Welcome <user>") fuera precisa y dinámica.
+
+4. El proyecto demostró la importancia de diferenciar entre alertas nativas 
+   del navegador (JavaScript Alerts) y modales HTML (SweetAlerts). 
+   - Las alertas de "Product Added" se gestionaron exitosamente con 
+     'Switch.toAlert()'.
+   - El modal final de compra se validó mediante XPaths específicos y 
+     clases de Question tipo Boolean.
+
+5. Gracias a la integración de Serenity BDD, el proyecto no solo ejecuta 
+   pruebas, sino que genera documentación viva. Los reportes proporcionan 
+   una trazabilidad completa (evidencias fotográficas) de cada paso dado 
+   por el actor, lo que reduce drásticamente el tiempo de depuración ante 
+   fallos en el entorno de pruebas.
+
+6. La configuración en 'serenity.properties' (autodownload del driver y 
+   chrome.switches) asegura que el proyecto sea portable y pueda ejecutarse 
+   en diferentes máquinas sin necesidad de configuraciones manuales de 
+   rutas de archivos ejecutables.
