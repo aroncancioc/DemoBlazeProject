@@ -1,0 +1,52 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:4.0.15")
+    }
+}
+
+plugins {
+    id("java")
+}
+
+apply plugin: "net.serenity-bdd.serenity-gradle-plugin"
+
+group = "co.com.screenplay.project"
+version = "1.0-SNAPSHOT"
+
+repositories {
+    mavenCentral()
+}
+
+def serenityVersion = "4.0.15"
+
+dependencies {
+    // Serenity Core, Screenplay y WebDriver (Selenium 4 interno)
+    implementation "net.serenity-bdd:serenity-core:${serenityVersion}"
+    implementation "net.serenity-bdd:serenity-screenplay:${serenityVersion}"
+    implementation "net.serenity-bdd:serenity-screenplay-webdriver:${serenityVersion}"
+
+    // Integración con Cucumber
+    implementation "net.serenity-bdd:serenity-cucumber:${serenityVersion}"
+
+    // --- CAMBIO A JUNIT 4 ---
+    // Usamos la librería de Serenity específica para JUnit 4
+    testImplementation "net.serenity-bdd:serenity-junit:${serenityVersion}"
+    // Dependencia clásica de JUnit 4.13.2 (la más estable)
+    testImplementation "junit:junit:4.13.2"
+
+    // Logging
+    implementation "org.slf4j:slf4j-simple:2.0.9"
+}
+
+test {
+    // IMPORTANTE: Eliminamos useJUnitPlatform() porque eso es para JUnit 5
+    // Gradle detectará automáticamente JUnit 4 si no se especifica plataforma.
+    systemProperties(System.getProperties())
+}
+
+serenity {
+    reports = ["single-page-html"]
+}
